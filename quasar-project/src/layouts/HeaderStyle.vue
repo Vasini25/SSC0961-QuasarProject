@@ -21,7 +21,9 @@
   
   <style>
   .q-pa-md {
-    padding: 16px;
+    padding: 12px;
+    padding-left: 100px;
+    padding-right: 100px;
   }
   
   .header-title {

@@ -1,16 +1,17 @@
 <template>
   <!-- Apresentação dos dados após carregados -->
 
-
-  <q-select color="secondary" v-model="model" :options="options" label="Temporada" :filter="true">
-    <template v-slot:prepend>
-      <q-icon name="event" />
-    </template>
-    <q-spinner v-if="!loaded" align="right" size="25px" color="secondary" />
-  </q-select>
-  
-  <div v-if="loaded">
-    <card-item :race-list="raceList" />
+ <div class="q-pa-md">
+    <q-select color="secondary" v-model="model" :options="options" label="Temporada" :filter="true">
+      <template v-slot:prepend>
+        <q-icon name="event" />
+      </template>
+      <q-spinner v-if="!loaded" align="right" size="25px" color="secondary" />
+    </q-select>
+    
+    <div v-if="loaded">
+      <card-item :race-list="raceList" />
+    </div>
   </div>
 </template>
 
@@ -89,3 +90,12 @@ export default defineComponent({
   }
 })
 </script>
+
+<style>
+  .q-pa-md {
+    padding: 12px;
+    padding-left: 100px;
+    padding-right: 100px;
+    align-items: center;
+  } 
+</style>

@@ -20,13 +20,11 @@ import { defineComponent } from 'vue'
 import { ref } from 'vue';
 import axios from 'axios';
 import CardItem from "../components/CardItem.vue";
-//import HeaderStyle from "../components/HeaderStyle.vue";
 
 export default defineComponent({
   name: 'IndexPage',
 
   components: {
-    //HeaderStyle,
     CardItem,
   },
 
@@ -54,12 +52,6 @@ export default defineComponent({
       raceList: [],
       loaded: false,
       search: '',
-      headers: [
-        {
-          text: "Race",
-          value: "Races",
-        },
-      ],
     };
   },
 

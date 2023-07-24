@@ -17,7 +17,6 @@
 
 <script>
 import { defineComponent } from 'vue'
-import { ref } from 'vue';
 import axios from 'axios';
 import CardItem from "../components/CardItem.vue";
 

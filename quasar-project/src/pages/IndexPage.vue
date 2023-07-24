@@ -10,7 +10,7 @@
     </q-select>
     
     <div v-if="loaded">
-      <card-item :race-list="raceList" />
+      <card-item :race-list="raceList"/>
     </div>
   </div>
 </template>

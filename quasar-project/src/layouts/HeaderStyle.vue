@@ -1,6 +1,6 @@
 <template>
     <q-layout>
-        <q-header elevated>
+        <q-header elevated class="shadows">
             <div class="q-pa-md">
               <img width="200" align="right" src="../assets/f1logo-nbg.png"/>
               <h1 class="header-title">Fórmula 1</h1>
@@ -34,5 +34,9 @@
 
   .q-page-container {
     padding-top: 64px;
+  }
+
+  .shadows {
+    box-shadow: 1px 10px 1px #000000;
   }
   </style>

@@ -18,20 +18,20 @@
               <q-item-label label>
                 Horário: {{ corrida.time }} (UTC)
               </q-item-label>
-              
-              <q-checkbox
-                left-label
-                v-model="corrida.val" 
-                checked-icon="star"
-                unchecked-icon="star_border"
-                label="Like"
-                indeterminate-icon="star_border"
-                size="45px"
-                style="font-size: medium;"
-                color="orange"
-                @change="saveCheckboxState"
-              />
 
+              <q-checkbox
+                  left-label
+                  v-model="corrida.val" 
+                  checked-icon="star"
+                  unchecked-icon="star_border"
+                  label="Like"
+                  indeterminate-icon="star_border"
+                  size="45px"
+                  style="font-size: medium;"
+                  color="orange"
+                />
+              
+              <q-input v-model="text" @keyup.enter="text" color="secondary" label="Comentário" style="width: 400px"/>
             </q-item-section>
           </q-expansion-item>
         </q-card-section>
@@ -53,7 +53,10 @@ import { ref, onMounted} from 'vue'
 
     
     setup() {
-      const corrida = ref({ val: false });
+      return {
+        text: ref(''),
+        val: ref(false)
+      }
     }
   };
 </script>

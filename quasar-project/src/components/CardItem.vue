@@ -1,10 +1,10 @@
 <template>
-  <div class="row inline justify-between items-baseline content-around">
+  <div class="row inline justify-start items-baseline content-around">
     <div class="col-4" v-for="(corrida, index) in raceList" :key="index">
       <q-card class="q-card--bordered custom-card shadows q-mb-sm">
         <q-card-section>
           <q-expansion-item 
-            :label= corrida.raceName
+            :label=corrida.raceName
             :caption=corrida.date
             >
             <q-item-section class="espacamento-col">

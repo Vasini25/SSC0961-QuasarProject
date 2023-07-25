@@ -31,7 +31,8 @@
                   color="orange"
                 />
               
-              <q-input v-model="text" @keyup.enter="text" color="secondary" label="Comentário" style="width: 400px"/>
+              <q-input v-model="corrida.text" @keyup.enter="submitComent(corrida)" color="secondary" label="Adicionar comentário" style="width: 400px"/>
+              <q-card v-show="corrida.newComent" class="comment-card"> {{ corrida.coment }}</q-card>
             </q-item-section>
           </q-expansion-item>
         </q-card-section>
@@ -41,24 +42,69 @@
 </template>
   
 <script>
-import { ref, onMounted} from 'vue'
+import { ref, onMounted, watch } from 'vue';
 
-  export default {
-    props: {
-      raceList: {
-        type: Array,
-        required: true,
-      },
+export default {
+  props: {
+    raceList: {
+      type: Array,
+      required: true,
     },
+  },
 
-    
-    setup() {
-      return {
-        text: ref(''),
-        val: ref(false)
+  setup(props) {
+    const localRaceList = ref([]);
+
+    // Carrega a lista de corridas do Armazenamento Local ao montar o componente
+    onMounted(() => {
+      loadFromLocalStorage();
+    });
+
+    // Monitora mudanças na propriedade raceList e atualiza a cópia localRaceList
+    watch(() => props.raceList, (newVal) => {
+      localRaceList.value = newVal;
+      saveToLocalStorage(); // Salva as alterações no Armazenamento Local
+    });
+
+    // Função para salvar a cópia localRaceList no Armazenamento Local
+    const saveToLocalStorage = () => {
+      localStorage.setItem('raceList', JSON.stringify(localRaceList.value));
+    };
+
+    // Função para carregar a lista de corridas do Armazenamento Local para a cópia localRaceList
+    const loadFromLocalStorage = () => {
+      const savedRaceList = localStorage.getItem('raceList');
+      if (savedRaceList) {
+        localRaceList.value = JSON.parse(savedRaceList);
+      } else {
+        // Se não houver dados salvos, inicialize a lista com os dados da prop raceList
+        localRaceList.value = props.raceList;
       }
-    }
-  };
+    };
+
+    const submitComent = (corrida) => {
+      corrida.coment = corrida.text;
+      corrida.newComent = true;
+      corrida.text = '';
+      saveToLocalStorage(); // Salva as alterações no Armazenamento Local
+    };
+
+    const getIcon = (iconName, corrida) => {
+      // Retorna o nome do ícone a ser exibido com base no valor da checkbox (corrida.val)
+      return corrida.val ? iconName : "star_border";
+    };
+
+    return {
+      localRaceList,
+      coment: '',
+      newComent: false,
+      text: ref(''),
+      val: ref(false),
+      submitComent,
+      getIcon,
+    };
+  },
+};
 </script>
   
 <style>
@@ -76,6 +122,16 @@ import { ref, onMounted} from 'vue'
     border: 1px solid #fe1b1b;
     max-width: 500px;
     margin-top: 20px;
+  }
+
+  .comment-card {
+    background-color: whitesmoke;
+    color: 3f3b3b;
+    border: 1px solid #fe1b1b;
+    max-width: 400px;
+    min-height: 30px;
+    text-align: center;
+    margin-top: 10px;
   }
 
   .shadows {
